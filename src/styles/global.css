@@ -37,11 +37,10 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
+	background-color: #FAF9F6;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
+	color: #2D2D2D;
 	font-size: 20px;
 	line-height: 1.7;
 }
@@ -81,10 +80,10 @@ b {
 	font-weight: 700;
 }
 a {
-	color: var(--accent);
+	color: #9CAF88;
 }
 a:hover {
-	color: var(--accent);
+	color: #7a9169;
 }
 p {
 	margin-bottom: 1em;
