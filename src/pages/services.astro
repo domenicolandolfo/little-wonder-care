@@ -1,0 +1,177 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Services & Packages — Little Wonder Care"
+			description="Gentle sleep coaching and postpartum doula services. Find the right support package for your family."
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<main>
+
+			<!-- Page Hero -->
+			<div class="page-hero bg-crema">
+				<p class="eyebrow">Services &amp; Packages</p>
+				<h1>Find the Right Support for Your Family</h1>
+				<p class="subtitle">Whether you need help with sleep, postpartum recovery, or just someone to talk to — I'm here. Choose the option that fits your needs.</p>
+			</div>
+
+			<!-- Packages -->
+			<div class="section">
+				<div class="section-inner">
+					<div class="section-header">
+						<p class="section-eyebrow">Packages</p>
+						<h2 class="section-title">Services &amp; Pricing</h2>
+					</div>
+
+					<div class="packages-grid">
+
+						<!-- Single Sleep Consultation -->
+						<div class="package-card sleep">
+							<span class="package-tag">Sleep</span>
+							<h3>Single Sleep Consultation</h3>
+							<p>A one-time 60-minute video call to assess your child's sleep and give you a clear, actionable plan.</p>
+							<div class="package-price">$150 <span>/ 60 min</span></div>
+							<ul class="package-includes">
+								<li>Pre-call intake questionnaire</li>
+								<li>60-minute video consultation</li>
+								<li>Written sleep plan within 48 hours</li>
+								<li>One follow-up email</li>
+							</ul>
+							<a href="/contact" class="btn-cta">Book Now</a>
+							<p class="package-booking-note">Books directly via calendar</p>
+						</div>
+
+						<!-- Gentle Sleep Program -->
+						<div class="package-card sleep">
+							<span class="package-tag">Sleep Package</span>
+							<h3>Gentle Sleep Program</h3>
+							<p>A comprehensive 2-week program with hands-on guidance to transform your family's sleep — gently.</p>
+							<div class="package-price">$450 <span>/ 2 weeks</span></div>
+							<ul class="package-includes">
+								<li>90-minute initial assessment call</li>
+								<li>Custom gentle sleep plan</li>
+								<li>14 days of daily support (text/email)</li>
+								<li>Two 30-minute follow-up calls</li>
+								<li>Sleep log tracking &amp; adjustments</li>
+							</ul>
+							<a href="/contact" class="btn-cta">Book First Session</a>
+							<p class="package-booking-note">Books first session via calendar · payment at booking</p>
+						</div>
+
+						<!-- Doula Consultation -->
+						<div class="package-card doula">
+							<span class="package-tag">Postpartum</span>
+							<h3>Doula Consultation</h3>
+							<p>A single support session to talk through your postpartum needs, newborn care questions, or feeding concerns.</p>
+							<div class="package-price">$100 <span>/ 60 min</span></div>
+							<ul class="package-includes">
+								<li>60-minute session (in-home or virtual)</li>
+								<li>Newborn care guidance</li>
+								<li>Feeding support &amp; resources</li>
+								<li>Personalized recommendations</li>
+							</ul>
+							<a href="/contact" class="btn-cta">Book Now</a>
+							<p class="package-booking-note">Books directly via calendar</p>
+						</div>
+
+						<!-- Postpartum Support Package -->
+						<div class="package-card doula">
+							<span class="package-tag">Doula Package</span>
+							<h3>Postpartum Support Package</h3>
+							<p>Ongoing in-home support during the early weeks. I walk beside you through the beautiful, messy reality of new parenthood.</p>
+							<div class="package-price">From $1,200 <span>/ custom</span></div>
+							<ul class="package-includes">
+								<li>Prenatal planning visit</li>
+								<li>Weekly in-home visits (Waco area)</li>
+								<li>Emotional &amp; practical support</li>
+								<li>Newborn care education</li>
+								<li>Feeding guidance</li>
+								<li>Light household support</li>
+							</ul>
+							<a href="#request" class="btn-outline">Request Availability</a>
+							<p class="package-booking-note">Limited to 3 clients/month · submit a request below</p>
+						</div>
+
+					</div>
+
+					<div class="services-note">
+						<strong>Not sure which option is right for you?</strong><br />
+						Book a free 15-minute discovery call and we'll figure it out together.
+						<br /><br />
+						<a href="/contact" class="btn-outline">Free Discovery Call</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Doula Request Form -->
+			<div class="section" id="request" style="background: var(--crema);">
+				<div class="section-inner">
+					<div class="section-header">
+						<p class="section-eyebrow">Postpartum Doula Package</p>
+						<h2 class="section-title">Request Availability</h2>
+					</div>
+					<form class="custom-form-preview" action="#" method="post">
+						<div class="slots-indicator">
+							<div class="slots-dot"></div>
+							<span>2 spots available for July 2026</span>
+						</div>
+						<div class="form-field">
+							<label for="req-name">Your Name</label>
+							<input type="text" id="req-name" name="name" placeholder="Jane Smith" />
+						</div>
+						<div class="form-field">
+							<label for="req-email">Email</label>
+							<input type="email" id="req-email" name="email" placeholder="jane@email.com" />
+						</div>
+						<div class="form-field">
+							<label for="req-due">Due Date</label>
+							<input type="date" id="req-due" name="due_date" />
+						</div>
+						<div class="form-field">
+							<label for="req-month">Preferred Start Month</label>
+							<select id="req-month" name="start_month">
+								<option value="">Select a month…</option>
+								<option>May 2026</option>
+								<option>June 2026</option>
+								<option>July 2026</option>
+								<option>August 2026</option>
+								<option>September 2026</option>
+							</select>
+						</div>
+						<div class="form-field">
+							<label for="req-notes">Anything you'd like me to know?</label>
+							<textarea id="req-notes" name="notes" placeholder="First baby, concerns about feeding…"></textarea>
+						</div>
+						<button type="submit" class="btn-cta" style="width:100%; border:none; cursor:pointer;">Submit Request</button>
+						<p style="font-size:0.78rem; color:rgba(45,45,45,0.45); text-align:center; margin-top:12px; margin-bottom:0;">
+							I'll review your request and get back to you within 48 hours.
+						</p>
+					</form>
+				</div>
+			</div>
+
+			<!-- CTA Band -->
+			<section class="cta-band">
+				<h2>Ready to Take the First Step?</h2>
+				<p>Book a free 20-minute call. Let's talk about your needs and find the right solution for your family.</p>
+				<a href="/contact" class="btn-cta-light">Book Your Free Call</a>
+			</section>
+
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main { width: 100%; max-width: 100%; margin: 0; padding: 0; }
+</style>

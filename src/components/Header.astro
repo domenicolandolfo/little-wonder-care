@@ -1,114 +1,212 @@
 ---
 const navLinks = [
-	{ href: '/', label: 'Home' },
+	{ href: '/services', label: 'Services' },
 	{ href: '/postpartum-doula', label: 'Postpartum Doula' },
 	{ href: '/sleep-consulting', label: 'Sleep Consulting' },
-	{ href: '/services', label: 'Services' },
 	{ href: '/about', label: 'About' },
-	{ href: '/blog', label: 'Blog' },
-	{ href: '/contact', label: 'Contact' },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="bg-[#FAF9F6] border-b border-[#9CAF88]/40 sticky top-0 z-50 shadow-sm">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-		<div class="flex items-center justify-between h-16">
+<nav class="navbar">
+	<div class="navbar-inner">
+		<!-- Logo -->
+		<a href="/" class="navbar-logo">
+			<img src="/logo.jpg" alt="Little Wonder Care logo" width="48" height="48" />
+			<span>Little Wonder Care</span>
+		</a>
 
-			<!-- Logo -->
-			<a
-				href="/"
-				class="text-[#2D2D2D] font-bold text-lg sm:text-xl tracking-tight hover:text-[#9CAF88] transition-colors duration-200 shrink-0"
-			>
-				Little Wonder Care
-			</a>
-
-			<!-- Desktop Navigation -->
-			<nav class="hidden lg:flex items-center gap-0.5" aria-label="Main navigation">
-				{navLinks.map(({ href, label }) => (
+		<!-- Desktop links -->
+		<ul class="navbar-links">
+			{navLinks.map(({ href, label }) => (
+				<li>
 					<a
 						href={href}
-						class={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 whitespace-nowrap ${
-							currentPath === href || (href !== '/' && currentPath.startsWith(href))
-								? 'text-[#9CAF88] bg-[#9CAF88]/10'
-								: 'text-[#2D2D2D] hover:text-[#9CAF88] hover:bg-[#9CAF88]/10'
-						}`}
+						class={currentPath === href || (href !== '/' && currentPath.startsWith(href)) ? 'active' : ''}
 					>
 						{label}
 					</a>
-				))}
-			</nav>
-
-			<!-- Hamburger Button -->
-			<button
-				id="hamburger-btn"
-				class="lg:hidden p-2 rounded-md text-[#2D2D2D] hover:text-[#9CAF88] hover:bg-[#9CAF88]/10 transition-colors duration-200"
-				aria-label="Open navigation menu"
-				aria-expanded="false"
-				aria-controls="mobile-menu"
-			>
-				<!-- Menu icon -->
-				<svg
-					id="menu-icon"
-					class="w-6 h-6"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-					aria-hidden="true"
-				>
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-				</svg>
-				<!-- Close icon -->
-				<svg
-					id="close-icon"
-					class="w-6 h-6 hidden"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-					aria-hidden="true"
-				>
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-				</svg>
-			</button>
-		</div>
-	</div>
-
-	<!-- Mobile Menu -->
-	<div
-		id="mobile-menu"
-		class="hidden lg:hidden bg-[#FAF9F6] border-t border-[#9CAF88]/30"
-		aria-label="Mobile navigation"
-	>
-		<nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-0.5">
-			{navLinks.map(({ href, label }) => (
-				<a
-					href={href}
-					class={`px-3 py-2.5 text-sm font-medium rounded-md transition-colors duration-200 ${
-						currentPath === href || (href !== '/' && currentPath.startsWith(href))
-							? 'text-[#9CAF88] bg-[#9CAF88]/10'
-							: 'text-[#2D2D2D] hover:text-[#9CAF88] hover:bg-[#9CAF88]/10'
-					}`}
-				>
-					{label}
-				</a>
+				</li>
 			))}
-		</nav>
+			<li><a href="/contact" class="navbar-cta">Book Now</a></li>
+		</ul>
+
+		<!-- Hamburger -->
+		<button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
 	</div>
-</header>
+
+	<!-- Mobile drawer -->
+	<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+		<ul>
+			{navLinks.map(({ href, label }) => (
+				<li><a href={href}>{label}</a></li>
+			))}
+			<li><a href="/contact" class="navbar-cta">Book Now</a></li>
+		</ul>
+	</div>
+</nav>
+
+<style>
+	.navbar {
+		background: #ede8de;
+		border-bottom: 1px solid rgba(92, 74, 42, 0.08);
+		padding: 0 24px;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+
+	.navbar-inner {
+		max-width: 1100px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 72px;
+	}
+
+	.navbar-logo {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		text-decoration: none;
+	}
+
+	.navbar-logo img {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+
+	.navbar-logo span {
+		font-family: 'Cormorant Garamond', Georgia, serif;
+		font-size: 1.35rem;
+		font-weight: 600;
+		color: #5a7a82;
+		letter-spacing: -0.01em;
+	}
+
+	.navbar-links {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.navbar-links a {
+		text-decoration: none;
+		font-size: 0.78rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #5c4a2a;
+		transition: color 0.2s;
+	}
+
+	.navbar-links a:hover,
+	.navbar-links a.active { color: #cc806b; }
+
+	.navbar-cta {
+		background: #cc806b !important;
+		color: #fff !important;
+		padding: 10px 24px;
+		border-radius: 50px;
+		font-size: 0.82rem !important;
+		font-weight: 600 !important;
+		letter-spacing: 0.04em !important;
+		transition: background 0.2s, transform 0.15s !important;
+	}
+
+	.navbar-cta:hover {
+		background: #e89984 !important;
+		transform: translateY(-1px);
+	}
+
+	/* Hamburger */
+	.menu-toggle {
+		display: none;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 8px;
+	}
+
+	.menu-toggle span {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: #5a7a82;
+		margin: 5px 0;
+		border-radius: 2px;
+		transition: 0.3s;
+	}
+
+	/* Mobile menu drawer */
+	.mobile-menu {
+		display: none;
+		background: #ede8de;
+		border-top: 1px solid rgba(92, 74, 42, 0.08);
+		padding: 16px 24px 24px;
+	}
+
+	.mobile-menu.open { display: block; }
+
+	.mobile-menu ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+
+	.mobile-menu a {
+		display: block;
+		padding: 10px 12px;
+		text-decoration: none;
+		font-size: 0.85rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #5c4a2a;
+		border-radius: 8px;
+		transition: background 0.2s, color 0.2s;
+	}
+
+	.mobile-menu a:hover { background: rgba(204, 128, 107, 0.08); color: #cc806b; }
+
+	.mobile-menu .navbar-cta {
+		margin-top: 8px;
+		display: inline-block;
+		padding: 10px 24px !important;
+	}
+
+	@media (max-width: 900px) {
+		.navbar-links { display: none; }
+		.menu-toggle { display: block; }
+		.navbar-inner { height: 60px; }
+		.navbar-logo span { font-size: 1.15rem; }
+	}
+</style>
 
 <script>
-	const btn = document.getElementById('hamburger-btn');
+	const toggle = document.getElementById('menu-toggle');
 	const menu = document.getElementById('mobile-menu');
-	const menuIcon = document.getElementById('menu-icon');
-	const closeIcon = document.getElementById('close-icon');
 
-	btn?.addEventListener('click', () => {
-		const isOpen = !menu?.classList.contains('hidden');
-		menu?.classList.toggle('hidden', isOpen);
-		menuIcon?.classList.toggle('hidden', !isOpen);
-		closeIcon?.classList.toggle('hidden', isOpen);
-		btn.setAttribute('aria-expanded', String(!isOpen));
-		btn.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+	toggle?.addEventListener('click', () => {
+		const isOpen = menu?.classList.contains('open');
+		menu?.classList.toggle('open', !isOpen);
+		toggle.setAttribute('aria-expanded', String(!isOpen));
+		toggle.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
 	});
 </script>

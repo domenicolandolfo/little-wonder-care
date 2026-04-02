@@ -1,8 +1,8 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
@@ -12,38 +12,798 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
+
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+
+			<!-- ===== HERO ===== -->
+			<section class="hero">
+				<div class="hero::before-circle"></div>
+				<div class="hero::after-circle"></div>
+				<div class="hero-inner">
+					<div class="hero-content">
+						<p class="hero-eyebrow">Postpartum doula · Gentle sleep coach</p>
+						<h1 class="hero-headline">You're in good hands.<br />And so is your baby.</h1>
+						<p class="hero-subtitle">Gentle, professional support for your postpartum journey and your baby's sleep. In Waco and online nationwide.</p>
+						<a href="/contact" class="btn-cta">Let's Talk</a>
+					</div>
+					<div class="hero-visual">
+						<div class="hero-logo-circle">
+							<img src="/logo.jpg" alt="Little Wonder Care" />
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ===== TRUST BAR ===== -->
+			<div class="trust-bar">
+				<div class="trust-bar-inner">
+					<div class="trust-item"><div class="trust-dot"></div>DONA Certified</div>
+					<div class="trust-item"><div class="trust-dot"></div>GSC Program Certified</div>
+					<div class="trust-item"><div class="trust-dot"></div>Waco, TX &amp; Online</div>
+					<div class="trust-item"><div class="trust-dot"></div>Gentle Approach</div>
+				</div>
+			</div>
+
+			<!-- ===== SERVICES ===== -->
+			<section class="services" id="services">
+				<div class="section-header">
+					<p class="section-eyebrow">What I Do</p>
+					<h2 class="section-title">My Services</h2>
+				</div>
+				<div class="services-grid">
+					<div class="service-card">
+						<div class="service-dot"></div>
+						<h3>Gentle Sleep Coaching</h3>
+						<p>A respectful, personalized approach to help your baby sleep better — no tears, no stress.</p>
+						<a href="/sleep-consulting" class="card-link">Learn More →</a>
+					</div>
+					<div class="service-card">
+						<div class="service-dot"></div>
+						<h3>Postpartum Support</h3>
+						<p>Reassuring, hands-on support in the early weeks after birth. Emotional care, newborn guidance, and practical help.</p>
+						<a href="/postpartum-doula" class="card-link">Learn More →</a>
+					</div>
+					<div class="service-card">
+						<div class="service-dot"></div>
+						<h3>Online Consultation</h3>
+						<p>A dedicated call to answer your questions about sleep, routines, and your baby's wellbeing. From anywhere.</p>
+						<a href="/services" class="card-link">Learn More →</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- ===== HOW IT WORKS ===== -->
+			<section class="how-it-works">
+				<div class="section-header">
+					<p class="section-eyebrow">How It Works</p>
+					<h2 class="section-title">Three Simple Steps</h2>
+				</div>
+				<div class="steps">
+					<div class="step">
+						<div class="step-number">1</div>
+						<h3>Book a Free Call</h3>
+						<p>20 minutes to get to know each other, understand your needs, and find the right path for you.</p>
+					</div>
+					<div class="step">
+						<div class="step-number">2</div>
+						<h3>Personalized Plan</h3>
+						<p>I create a custom plan for your family, honoring your values and your baby's temperament.</p>
+					</div>
+					<div class="step">
+						<div class="step-number">3</div>
+						<h3>Support &amp; Results</h3>
+						<p>I walk with you step by step with dedicated follow-ups until you feel confident and at peace.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ===== ABOUT PREVIEW ===== -->
+			<section class="about" id="about">
+				<div class="about-inner">
+					<div class="about-avatar">S</div>
+					<h2 class="about-name">Silvia</h2>
+					<p class="about-role">Postpartum Doula · Gentle Sleep Coach</p>
+					<p class="about-bio">I know what it means to wake up for the fifth time in one night and feel completely alone. That's why I chose this work: to be the person I wished I'd had by my side. No judgment, just real support.</p>
+					<a href="/about" class="btn-cta-outline">Meet Silvia</a>
+				</div>
+			</section>
+
+			<!-- ===== TESTIMONIAL ===== -->
+			<section class="testimonials">
+				<div class="section-header">
+					<p class="section-eyebrow">Moms Say</p>
+					<h2 class="section-title">Real Stories</h2>
+				</div>
+				<div class="testimonial-card">
+					<p class="testimonial-quote">"Silvia was my anchor in the early weeks. I didn't know what was normal and what wasn't, and she was always there with calm and confidence. My baby started sleeping better and I started feeling like myself again."</p>
+					<p class="testimonial-author">Maria R.</p>
+					<p class="testimonial-detail">Mom of Luca, 4 months</p>
+				</div>
+			</section>
+
+			<!-- ===== BLOG PREVIEW ===== -->
+			<section class="blog-preview" id="blog">
+				<div class="section-header">
+					<p class="section-eyebrow">From the Blog</p>
+					<h2 class="section-title">Resources for Parents</h2>
+				</div>
+				<div class="blog-grid">
+					<div class="blog-card">
+						<div class="blog-card-image"><span>Sleep</span></div>
+						<div class="blog-card-body">
+							<h3>What Does a Postpartum Doula Do? Everything You Need to Know</h3>
+							<p>The complete guide to understanding how a doula can support you in the early weeks.</p>
+						</div>
+					</div>
+					<div class="blog-card">
+						<div class="blog-card-image"><span>Postpartum</span></div>
+						<div class="blog-card-body">
+							<h3>5 Signs Your Baby Is Ready for Sleep Training</h3>
+							<p>How to recognize the right time to start a sleep journey.</p>
+						</div>
+					</div>
+					<div class="blog-card">
+						<div class="blog-card-image"><span>Guide</span></div>
+						<div class="blog-card-body">
+							<h3>How to Survive the 4-Month Sleep Regression</h3>
+							<p>Practical strategies to navigate one of the toughest moments of the first year.</p>
+						</div>
+					</div>
+				</div>
+				<div style="text-align:center; margin-top: 40px;">
+					<a href="/blog" class="btn-cta-outline">Read All Articles</a>
+				</div>
+			</section>
+
+			<!-- ===== LEAD MAGNET ===== -->
+			<section class="lead-magnet">
+				<div class="lead-magnet-inner">
+					<h2 class="section-title">Free Newborn Sleep Guide</h2>
+					<p>Download the guide and get practical tips straight to your inbox.</p>
+					<form class="email-form" onsubmit="return false;">
+						<input type="email" placeholder="Your email address..." aria-label="Email address" />
+						<button type="submit">Download</button>
+					</form>
+				</div>
+			</section>
+
+			<!-- ===== FINAL CTA BAND ===== -->
+			<section class="cta-band">
+				<h2>Ready to Take the First Step?</h2>
+				<p>Book a free 20-minute call. Let's talk about your needs and find the right solution for your family.</p>
+				<a href="/contact" class="btn-cta-light">Book Your Free Call</a>
+			</section>
+
 		</main>
+
 		<Footer />
 	</body>
 </html>
+
+<style>
+	/* Reset for this page */
+	main { width: 100%; max-width: 100%; margin: 0; padding: 0; }
+
+	/* ===== HERO ===== */
+	.hero {
+		background: var(--celeste);
+		padding: 80px 24px 100px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.hero::before {
+		content: '';
+		position: absolute;
+		width: 300px;
+		height: 300px;
+		border-radius: 50%;
+		background: rgba(237, 232, 222, 0.25);
+		top: -60px;
+		right: -80px;
+	}
+
+	.hero::after {
+		content: '';
+		position: absolute;
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		background: rgba(246, 212, 219, 0.2);
+		bottom: -40px;
+		left: 10%;
+	}
+
+	.hero-inner {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 60px;
+		align-items: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-content { max-width: 520px; }
+
+	.hero-eyebrow {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--teal-medio);
+		font-weight: 500;
+		margin-bottom: 16px;
+	}
+
+	.hero-headline {
+		font-family: var(--font-serif);
+		font-size: 2.8rem;
+		font-weight: 600;
+		line-height: 1.15;
+		color: var(--teal-scuro);
+		margin-bottom: 20px;
+		letter-spacing: -0.01em;
+	}
+
+	.hero-subtitle {
+		font-size: 1.05rem;
+		color: var(--teal-medio);
+		line-height: 1.65;
+		margin-bottom: 32px;
+		max-width: 440px;
+	}
+
+	.btn-cta {
+		display: inline-block;
+		background: var(--corallo);
+		color: #fff;
+		padding: 14px 36px;
+		border-radius: 50px;
+		text-decoration: none;
+		font-size: 0.95rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+		box-shadow: 0 4px 16px rgba(204, 128, 107, 0.25);
+	}
+
+	.btn-cta:hover {
+		background: var(--pesca);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 24px rgba(204, 128, 107, 0.35);
+		color: #fff;
+	}
+
+	.btn-cta-outline {
+		display: inline-block;
+		border: 2px solid var(--corallo);
+		color: var(--corallo);
+		padding: 12px 32px;
+		border-radius: 50px;
+		text-decoration: none;
+		font-size: 0.9rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		margin-top: 24px;
+		transition: background 0.2s, color 0.2s;
+	}
+
+	.btn-cta-outline:hover {
+		background: var(--corallo);
+		color: #fff;
+	}
+
+	.hero-visual {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.hero-logo-circle {
+		width: 280px;
+		height: 280px;
+		border-radius: 50%;
+		overflow: hidden;
+		box-shadow: 0 20px 60px rgba(90, 122, 130, 0.15);
+	}
+
+	.hero-logo-circle img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 0;
+	}
+
+	/* Hero animation */
+	.hero-content { animation: fadeInUp 0.8s ease-out; }
+	.hero-visual { animation: fadeInUp 0.8s ease-out 0.2s both; }
+
+	@keyframes fadeInUp {
+		from { opacity: 0; transform: translateY(24px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	/* ===== TRUST BAR ===== */
+	.trust-bar {
+		background: var(--off-white);
+		padding: 28px 24px;
+		text-align: center;
+		border-bottom: 1px solid rgba(183, 201, 206, 0.3);
+	}
+
+	.trust-bar-inner {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 48px;
+		flex-wrap: wrap;
+	}
+
+	.trust-item {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: 0.82rem;
+		color: var(--teal-medio);
+		font-weight: 500;
+		letter-spacing: 0.02em;
+	}
+
+	.trust-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--corallo);
+		flex-shrink: 0;
+	}
+
+	/* ===== SECTION SHARED ===== */
+	.section-header {
+		text-align: center;
+		margin-bottom: 56px;
+	}
+
+	.section-eyebrow {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--teal-chiaro);
+		font-weight: 500;
+		margin-bottom: 10px;
+	}
+
+	.section-title {
+		font-family: var(--font-serif);
+		font-size: 2.2rem;
+		font-weight: 600;
+		color: var(--teal-scuro);
+		letter-spacing: -0.01em;
+		margin: 0;
+	}
+
+	/* ===== SERVICES ===== */
+	.services { padding: var(--section-padding); }
+
+	.services-grid {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 28px;
+	}
+
+	.service-card {
+		padding: 40px 32px;
+		border-radius: 20px;
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+
+	.service-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+	}
+
+	.service-card:nth-child(1) { background: var(--celeste); }
+	.service-card:nth-child(2) { background: var(--crema); }
+	.service-card:nth-child(3) { background: var(--rosa-cipria); }
+
+	.service-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		margin-bottom: 20px;
+	}
+
+	.service-card:nth-child(1) .service-dot { background: var(--teal-scuro); }
+	.service-card:nth-child(2) .service-dot { background: var(--warm-brown); }
+	.service-card:nth-child(3) .service-dot { background: var(--corallo); }
+
+	.service-card h3 {
+		font-family: var(--font-serif);
+		font-size: 1.4rem;
+		font-weight: 600;
+		margin-bottom: 12px;
+		color: var(--charcoal);
+	}
+
+	.service-card p {
+		font-size: 0.92rem;
+		line-height: 1.65;
+		color: rgba(45, 45, 45, 0.75);
+		margin: 0;
+	}
+
+	.card-link {
+		display: inline-block;
+		margin-top: 20px;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--corallo);
+		text-decoration: none;
+		letter-spacing: 0.02em;
+		transition: color 0.2s;
+	}
+
+	.card-link:hover { color: var(--pesca); }
+
+	/* ===== HOW IT WORKS ===== */
+	.how-it-works {
+		padding: var(--section-padding);
+		background: var(--crema);
+	}
+
+	.steps {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 40px;
+	}
+
+	.step {
+		text-align: center;
+		padding: 0 20px;
+	}
+
+	.step-number {
+		width: 56px;
+		height: 56px;
+		border-radius: 50%;
+		background: var(--corallo);
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: var(--font-serif);
+		font-size: 1.4rem;
+		font-weight: 600;
+		margin: 0 auto 20px;
+	}
+
+	.step h3 {
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-weight: 600;
+		margin-bottom: 10px;
+		color: var(--teal-scuro);
+	}
+
+	.step p {
+		font-size: 0.9rem;
+		color: rgba(45, 45, 45, 0.7);
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	/* ===== ABOUT PREVIEW ===== */
+	.about {
+		background: var(--rosa-cipria);
+		padding: var(--section-padding);
+	}
+
+	.about-inner {
+		max-width: 720px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.about-avatar {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		background: var(--corallo);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 24px;
+		font-family: var(--font-serif);
+		font-size: 2.4rem;
+		font-weight: 600;
+		color: #fff;
+	}
+
+	.about-name {
+		font-family: var(--font-serif);
+		font-size: 1.8rem;
+		font-weight: 600;
+		color: var(--rosa-scuro);
+		margin-bottom: 6px;
+	}
+
+	.about-role {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--rosa-medio);
+		font-weight: 500;
+		margin-bottom: 24px;
+	}
+
+	.about-bio {
+		font-size: 1.05rem;
+		line-height: 1.75;
+		color: rgba(45, 45, 45, 0.8);
+		font-style: italic;
+		max-width: 560px;
+		margin: 0 auto;
+	}
+
+	/* ===== TESTIMONIALS ===== */
+	.testimonials {
+		padding: var(--section-padding);
+		background: var(--off-white);
+	}
+
+	.testimonial-card {
+		max-width: 680px;
+		margin: 0 auto;
+		background: var(--crema);
+		border-left: 3px solid var(--corallo);
+		padding: 40px 44px;
+		border-radius: 0 16px 16px 0;
+	}
+
+	.testimonial-quote {
+		font-family: var(--font-serif);
+		font-size: 1.2rem;
+		font-style: italic;
+		line-height: 1.7;
+		color: var(--charcoal);
+		margin-bottom: 20px;
+	}
+
+	.testimonial-author {
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--warm-brown);
+		margin: 0;
+	}
+
+	.testimonial-detail {
+		font-size: 0.78rem;
+		color: rgba(92, 74, 42, 0.65);
+		margin-top: 2px;
+		margin-bottom: 0;
+	}
+
+	/* ===== BLOG PREVIEW ===== */
+	.blog-preview {
+		padding: var(--section-padding);
+		background: var(--off-white);
+	}
+
+	.blog-grid {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 28px;
+	}
+
+	.blog-card {
+		background: #fff;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+
+	.blog-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+	}
+
+	.blog-card-image {
+		height: 160px;
+		background: var(--celeste);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.blog-card-image span {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--teal-medio);
+		background: rgba(255,255,255,0.6);
+		padding: 6px 14px;
+		border-radius: 20px;
+	}
+
+	.blog-card:nth-child(2) .blog-card-image { background: var(--crema); }
+	.blog-card:nth-child(2) .blog-card-image span { color: var(--warm-brown); }
+	.blog-card:nth-child(3) .blog-card-image { background: var(--rosa-cipria); }
+	.blog-card:nth-child(3) .blog-card-image span { color: var(--rosa-scuro); }
+
+	.blog-card-body { padding: 24px; }
+
+	.blog-card-body h3 {
+		font-family: var(--font-serif);
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: var(--charcoal);
+		margin-bottom: 8px;
+		line-height: 1.35;
+	}
+
+	.blog-card-body p {
+		font-size: 0.85rem;
+		color: rgba(45, 45, 45, 0.6);
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	/* ===== LEAD MAGNET ===== */
+	.lead-magnet {
+		padding: 60px 24px;
+		background: var(--crema);
+	}
+
+	.lead-magnet-inner {
+		max-width: 640px;
+		margin: 0 auto;
+		text-align: center;
+		background: #fff;
+		padding: 48px 40px;
+		border-radius: 24px;
+		box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+	}
+
+	.lead-magnet-inner .section-title {
+		font-size: 1.6rem;
+		margin-bottom: 12px;
+	}
+
+	.lead-magnet-inner p {
+		font-size: 0.95rem;
+		color: rgba(45, 45, 45, 0.7);
+		margin-bottom: 24px;
+	}
+
+	.email-form {
+		display: flex;
+		gap: 12px;
+		max-width: 420px;
+		margin: 0 auto;
+	}
+
+	.email-form input {
+		flex: 1;
+		padding: 12px 20px;
+		border: 1px solid rgba(183, 201, 206, 0.5);
+		border-radius: 50px;
+		font-size: 0.9rem;
+		outline: none;
+		font-family: var(--font-sans);
+		background: var(--off-white);
+		color: var(--charcoal);
+		transition: border-color 0.2s;
+	}
+
+	.email-form input:focus { border-color: var(--celeste); }
+
+	.email-form button {
+		background: var(--corallo);
+		color: #fff;
+		border: none;
+		padding: 12px 28px;
+		border-radius: 50px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: background 0.2s;
+		white-space: nowrap;
+		font-family: var(--font-sans);
+	}
+
+	.email-form button:hover { background: var(--pesca); }
+
+	/* ===== FINAL CTA BAND ===== */
+	.cta-band {
+		background: var(--teal-scuro);
+		padding: 80px 24px;
+		text-align: center;
+	}
+
+	.cta-band h2 {
+		font-family: var(--font-serif);
+		font-size: 2.2rem;
+		font-weight: 600;
+		color: rgba(255,255,255,0.95);
+		margin-bottom: 12px;
+	}
+
+	.cta-band p {
+		font-size: 1rem;
+		color: rgba(255,255,255,0.65);
+		max-width: 440px;
+		margin: 0 auto 32px;
+		line-height: 1.6;
+	}
+
+	.btn-cta-light {
+		display: inline-block;
+		background: var(--corallo);
+		color: #fff;
+		padding: 16px 40px;
+		border-radius: 50px;
+		text-decoration: none;
+		font-size: 1rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		transition: background 0.2s, transform 0.15s;
+		box-shadow: 0 4px 20px rgba(204, 128, 107, 0.35);
+	}
+
+	.btn-cta-light:hover {
+		background: var(--pesca);
+		transform: translateY(-2px);
+		color: #fff;
+	}
+
+	/* ===== RESPONSIVE ===== */
+	@media (max-width: 900px) {
+		.hero-inner {
+			grid-template-columns: 1fr;
+			text-align: center;
+			gap: 40px;
+		}
+
+		.hero-content { margin: 0 auto; }
+		.hero-subtitle { margin: 0 auto 32px; }
+
+		.services-grid,
+		.steps,
+		.blog-grid {
+			grid-template-columns: 1fr;
+			max-width: 480px;
+			margin: 0 auto;
+		}
+
+		.hero-headline { font-size: 2.2rem; }
+		.section-title { font-size: 1.8rem; }
+		.cta-band h2 { font-size: 1.8rem; }
+
+		.email-form { flex-direction: column; }
+	}
+
+	@media (max-width: 600px) {
+		:root { --section-padding: 56px 20px; }
+
+		.hero { padding: 56px 20px 72px; }
+		.hero-headline { font-size: 1.85rem; }
+		.hero-logo-circle { width: 200px; height: 200px; }
+
+		.trust-bar-inner { gap: 20px; }
+
+		.testimonial-card { padding: 28px 24px; }
+
+		.lead-magnet-inner { padding: 32px 24px; }
+
+		.cta-band { padding: 56px 20px; }
+	}
+</style>
