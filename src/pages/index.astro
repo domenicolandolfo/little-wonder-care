@@ -3,6 +3,9 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getFeaturedTestimonials } from '../lib/sanity';
+
+const testimonials = await getFeaturedTestimonials().catch(() => []);
 ---
 
 <!doctype html>
@@ -108,16 +111,43 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				</div>
 			</section>
 
-			<!-- ===== TESTIMONIAL ===== -->
+			<!-- ===== TESTIMONIALS (Sanity) ===== -->
 			<section class="testimonials">
 				<div class="section-header">
 					<p class="section-eyebrow">Moms Say</p>
 					<h2 class="section-title">Real Stories</h2>
 				</div>
-				<div class="testimonial-card">
-					<p class="testimonial-quote">"Silvia was my anchor in the early weeks. I didn't know what was normal and what wasn't, and she was always there with calm and confidence. My baby started sleeping better and I started feeling like myself again."</p>
-					<p class="testimonial-author">Maria R.</p>
-					<p class="testimonial-detail">Mom of Luca, 4 months</p>
+
+				{testimonials.length > 0 ? (
+					<div class="testimonials-list">
+						{testimonials.map((t) => (
+							<div class="testimonial-card">
+								{t.rating && t.rating > 0 && (
+									<div class="testimonial-stars" aria-label={`${t.rating} out of 5 stars`}>
+										{'★'.repeat(t.rating)}{'☆'.repeat(5 - t.rating)}
+									</div>
+								)}
+								<p class="testimonial-quote">"{t.quote}"</p>
+								<p class="testimonial-author">{t.name}</p>
+								{(t.serviceType || t.childAge) && (
+									<p class="testimonial-detail">
+										{[t.serviceType, t.childAge ? `· ${t.childAge}` : ''].filter(Boolean).join(' ')}
+									</p>
+								)}
+							</div>
+						))}
+					</div>
+				) : (
+					/* Fallback when no featured testimonials exist in Sanity yet */
+					<div class="testimonial-card">
+						<p class="testimonial-quote">"Silvia was my anchor in the early weeks. I didn't know what was normal and what wasn't, and she was always there with calm and confidence. My baby started sleeping better and I started feeling like myself again."</p>
+						<p class="testimonial-author">Maria R.</p>
+						<p class="testimonial-detail">Mom of Luca, 4 months</p>
+					</div>
+				)}
+
+				<div style="text-align:center; margin-top: 40px;">
+					<a href="/testimonials" class="btn-cta-outline">Read All Stories</a>
 				</div>
 			</section>
 
@@ -557,18 +587,44 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		background: var(--off-white);
 	}
 
-	.testimonial-card {
-		max-width: 680px;
+	.testimonials-list {
+		max-width: var(--max-width);
 		margin: 0 auto;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 28px;
+	}
+
+	/* Single testimonial (fallback or one result) stays centred */
+	.testimonials-list:has(> :only-child) {
+		grid-template-columns: minmax(0, 680px);
+		justify-content: center;
+	}
+
+	.testimonial-card {
 		background: var(--crema);
 		border-left: 3px solid var(--corallo);
-		padding: 40px 44px;
+		padding: 36px 40px;
 		border-radius: 0 16px 16px 0;
+	}
+
+	/* Fallback single card retains original centred look */
+	.testimonials > .testimonial-card {
+		max-width: 680px;
+		margin: 0 auto;
+		padding: 40px 44px;
+	}
+
+	.testimonial-stars {
+		font-size: 1rem;
+		color: var(--corallo);
+		letter-spacing: 0.05em;
+		margin-bottom: 14px;
 	}
 
 	.testimonial-quote {
 		font-family: var(--font-serif);
-		font-size: 1.2rem;
+		font-size: 1.15rem;
 		font-style: italic;
 		line-height: 1.7;
 		color: var(--charcoal);
@@ -587,6 +643,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		color: rgba(92, 74, 42, 0.65);
 		margin-top: 2px;
 		margin-bottom: 0;
+	}
+
+	@media (max-width: 600px) {
+		.testimonials-list { grid-template-columns: 1fr; }
+		.testimonial-card { padding: 28px 24px; }
 	}
 
 	/* ===== BLOG PREVIEW ===== */

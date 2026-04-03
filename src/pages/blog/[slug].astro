@@ -1,0 +1,215 @@
+---
+import { PortableText } from '@portabletext/react';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getBlogPost, getBlogPostSlugs, urlFor } from '../../lib/sanity';
+
+export async function getStaticPaths() {
+	const slugs = await getBlogPostSlugs().catch(() => []);
+	return slugs.map(({ slug }) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const post = await getBlogPost(slug).catch(() => null);
+
+if (!post) {
+	return Astro.redirect('/blog', 307);
+}
+
+function formatDate(iso?: string) {
+	if (!iso) return '';
+	return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const pageTitle = post.seoTitle ?? post.title;
+const pageDesc = post.seoDescription ?? post.excerpt ?? '';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${pageTitle} — Little Wonder Care`} description={pageDesc} />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<!-- Post Hero -->
+			<div class="post-hero">
+				<div class="post-hero-inner">
+					<a href="/blog" class="back-link">← Back to Blog</a>
+
+					{post.publishedAt && (
+						<p class="post-date">{formatDate(post.publishedAt)}</p>
+					)}
+					<h1 class="post-title">{post.title}</h1>
+					{post.excerpt && (
+						<p class="post-excerpt">{post.excerpt}</p>
+					)}
+				</div>
+			</div>
+
+			{post.mainImage?.asset && (
+				<div class="post-image-wrap">
+					<img
+						src={urlFor(post.mainImage).width(1100).height(500).auto('format').url()}
+						alt={post.mainImage.alt ?? post.title}
+						width="1100"
+						height="500"
+					/>
+				</div>
+			)}
+
+			<!-- Post Body -->
+			<div class="section">
+				<div class="post-body">
+					{post.body && post.body.length > 0 ? (
+						<PortableText value={post.body} />
+					) : (
+						<p style="color: rgba(45,45,45,0.5); font-style: italic;">This post has no content yet.</p>
+					)}
+				</div>
+
+				<div class="post-footer">
+					<a href="/blog" class="btn-outline">← Back to Blog</a>
+				</div>
+			</div>
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main { width: 100%; max-width: 100%; margin: 0; padding: 0; }
+
+	/* Hero */
+	.post-hero {
+		background: var(--crema);
+		padding: 56px 24px 48px;
+		border-bottom: 1px solid rgba(183,201,206,0.3);
+	}
+
+	.post-hero-inner {
+		max-width: 760px;
+		margin: 0 auto;
+	}
+
+	.back-link {
+		display: inline-block;
+		font-size: 0.82rem;
+		font-weight: 500;
+		color: var(--teal-medio);
+		text-decoration: none;
+		letter-spacing: 0.02em;
+		margin-bottom: 20px;
+		transition: color 0.2s;
+	}
+	.back-link:hover { color: var(--corallo); }
+
+	.post-date {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--teal-chiaro);
+		font-weight: 500;
+		margin: 0 0 12px;
+	}
+
+	.post-title {
+		font-family: var(--font-serif);
+		font-size: clamp(1.8rem, 4vw, 2.8rem);
+		font-weight: 600;
+		color: var(--teal-scuro);
+		line-height: 1.15;
+		margin: 0 0 16px;
+	}
+
+	.post-excerpt {
+		font-size: 1.05rem;
+		color: var(--teal-medio);
+		line-height: 1.65;
+		margin: 0;
+	}
+
+	/* Hero image */
+	.post-image-wrap {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 0 24px;
+	}
+
+	.post-image-wrap img {
+		width: 100%;
+		height: auto;
+		border-radius: 16px;
+		object-fit: cover;
+		margin-top: 40px;
+	}
+
+	/* Body prose */
+	.post-body {
+		max-width: 760px;
+		margin: 0 auto;
+		font-size: 1.05rem;
+		line-height: 1.8;
+		color: rgba(45,45,45,0.82);
+	}
+
+	.post-body :global(h2) {
+		font-family: var(--font-serif);
+		font-size: 1.6rem;
+		font-weight: 600;
+		color: var(--teal-scuro);
+		margin: 2em 0 0.6em;
+	}
+
+	.post-body :global(h3) {
+		font-family: var(--font-serif);
+		font-size: 1.3rem;
+		font-weight: 600;
+		color: var(--teal-scuro);
+		margin: 1.6em 0 0.5em;
+	}
+
+	.post-body :global(p) {
+		margin-bottom: 1.4em;
+	}
+
+	.post-body :global(ul),
+	.post-body :global(ol) {
+		padding-left: 1.5em;
+		margin-bottom: 1.4em;
+	}
+
+	.post-body :global(li) { margin-bottom: 0.4em; }
+
+	.post-body :global(blockquote) {
+		border-left: 3px solid var(--corallo);
+		padding: 4px 0 4px 20px;
+		margin: 1.6em 0;
+		font-family: var(--font-serif);
+		font-size: 1.15rem;
+		font-style: italic;
+		color: var(--teal-medio);
+	}
+
+	.post-body :global(a) { color: var(--corallo); }
+	.post-body :global(a:hover) { color: var(--pesca); }
+
+	.post-body :global(img) {
+		border-radius: 12px;
+		margin: 1.6em 0;
+	}
+
+	.post-body :global(strong) { color: var(--charcoal); }
+
+	/* Footer nav */
+	.post-footer {
+		max-width: 760px;
+		margin: 56px auto 0;
+		padding-top: 32px;
+		border-top: 1px solid rgba(183,201,206,0.35);
+	}
+</style>

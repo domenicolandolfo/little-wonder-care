@@ -1,6 +1,7 @@
 import { createClient } from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { createImageUrlBuilder } from '@sanity/image-url';
+import type { SanityImageSource } from '@sanity/image-url';
+import type { PortableTextBlock } from '@portabletext/types';
 
 // ─── Client ──────────────────────────────────────────────────────────────────
 
@@ -13,7 +14,7 @@ export const client = createClient({
 
 // ─── Image URL builder ────────────────────────────────────────────────────────
 
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder(client);
 
 export function urlFor(source: SanityImageSource) {
   return builder.image(source);
@@ -40,7 +41,7 @@ export interface BlogPost {
   publishedAt?: string;
   excerpt?: string;
   mainImage?: SanityImage;
-  body?: unknown[];
+  body?: PortableTextBlock[];
   seoTitle?: string;
   seoDescription?: string;
 }
@@ -61,7 +62,7 @@ export interface FAQ {
   _id: string;
   _type: 'faq';
   question: string;
-  answer?: unknown[];
+  answer?: PortableTextBlock[];
   category?: 'General' | 'Sleep Consulting' | 'Postpartum Doula' | 'Pricing';
   order?: number;
 }
