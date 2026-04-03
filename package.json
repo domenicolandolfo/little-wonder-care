@@ -26,8 +26,10 @@
     "astro": "^6.1.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-is": "^19.2.4",
     "sanity": "^5.19.0",
     "sharp": "^0.34.3",
+    "styled-components": "^6.3.12",
     "tailwindcss": "^4.2.2"
   }
 }
