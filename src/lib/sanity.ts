@@ -67,16 +67,6 @@ export interface FAQ {
   order?: number;
 }
 
-export interface ServicePackage {
-  _key: string;
-  name: string;
-  price?: string;
-  description?: string;
-  features?: string[];
-  ctaText?: string;
-  ctaLink?: string;
-}
-
 export interface SanityServicePackage {
   _id: string;
   _type: 'servicePackage';
@@ -93,16 +83,6 @@ export interface SanityServicePackage {
   ctaLink?: string;
   sortOrder?: number;
   isActive?: boolean;
-}
-
-export interface Service {
-  _id: string;
-  _type: 'service';
-  title: string;
-  slug: SanitySlug;
-  description?: string;
-  icon?: string;
-  packages?: ServicePackage[];
 }
 
 // ─── GROQ queries ─────────────────────────────────────────────────────────────
@@ -193,22 +173,6 @@ export async function getFAQs(category?: string): Promise<FAQ[]> {
 }
 
 /**
- * Fetch all services with their packages.
- */
-export async function getServices(): Promise<Service[]> {
-  return client.fetch(
-    `*[_type == "service"] | order(_createdAt asc) {
-      _id,
-      title,
-      slug,
-      description,
-      icon,
-      packages[] { _key, name, price, description, features, ctaText, ctaLink }
-    }`,
-  );
-}
-
-/**
  * Fetch all active service packages ordered by sortOrder.
  */
 export async function getServicePackages(): Promise<SanityServicePackage[]> {
@@ -257,19 +221,3 @@ export async function getServicePackagesByType(serviceType: string): Promise<San
   );
 }
 
-/**
- * Fetch a single service by slug.
- */
-export async function getService(slug: string): Promise<Service | null> {
-  return client.fetch(
-    `*[_type == "service" && slug.current == $slug][0] {
-      _id,
-      title,
-      slug,
-      description,
-      icon,
-      packages[] { _key, name, price, description, features, ctaText, ctaLink }
-    }`,
-    { slug },
-  );
-}

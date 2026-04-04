@@ -29,10 +29,6 @@ export default defineConfig({
               .schemaType('faq')
               .child(S.documentTypeList('faq').title('FAQs')),
             S.listItem()
-              .title('Services')
-              .schemaType('service')
-              .child(S.documentTypeList('service').title('Services')),
-            S.listItem()
               .title('Service Packages')
               .schemaType('servicePackage')
               .child(S.documentTypeList('servicePackage').title('Service Packages')),

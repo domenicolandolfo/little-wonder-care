@@ -12,7 +12,7 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://little-wonder-care.vercel.app',
   integrations: [
     mdx(),
     sitemap(),
@@ -27,12 +27,6 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
-    build: {
-      rollupOptions: {
-        // Keep Sanity studio deps out of the client bundle
-        external: ['@sanity/vision'],
-      },
-    },
   },
 
   adapter: vercel(),
