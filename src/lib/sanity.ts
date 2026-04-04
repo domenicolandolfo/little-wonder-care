@@ -77,6 +77,24 @@ export interface ServicePackage {
   ctaLink?: string;
 }
 
+export interface SanityServicePackage {
+  _id: string;
+  _type: 'servicePackage';
+  title: string;
+  slug?: SanitySlug;
+  serviceType?: 'Postpartum Doula' | 'Sleep Consulting' | 'Consultation';
+  description?: string;
+  features?: string[];
+  price?: number;
+  priceNote?: string;
+  duration?: string;
+  isPopular?: boolean;
+  ctaText?: string;
+  ctaLink?: string;
+  sortOrder?: number;
+  isActive?: boolean;
+}
+
 export interface Service {
   _id: string;
   _type: 'service';
@@ -187,6 +205,55 @@ export async function getServices(): Promise<Service[]> {
       icon,
       packages[] { _key, name, price, description, features, ctaText, ctaLink }
     }`,
+  );
+}
+
+/**
+ * Fetch all active service packages ordered by sortOrder.
+ */
+export async function getServicePackages(): Promise<SanityServicePackage[]> {
+  return client.fetch(
+    `*[_type == "servicePackage" && isActive != false] | order(sortOrder asc, _createdAt asc) {
+      _id,
+      title,
+      slug,
+      serviceType,
+      description,
+      features,
+      price,
+      priceNote,
+      duration,
+      isPopular,
+      ctaText,
+      ctaLink,
+      sortOrder,
+      isActive
+    }`,
+  );
+}
+
+/**
+ * Fetch active service packages filtered by serviceType.
+ */
+export async function getServicePackagesByType(serviceType: string): Promise<SanityServicePackage[]> {
+  return client.fetch(
+    `*[_type == "servicePackage" && isActive != false && serviceType == $serviceType] | order(sortOrder asc, _createdAt asc) {
+      _id,
+      title,
+      slug,
+      serviceType,
+      description,
+      features,
+      price,
+      priceNote,
+      duration,
+      isPopular,
+      ctaText,
+      ctaLink,
+      sortOrder,
+      isActive
+    }`,
+    { serviceType },
   );
 }
 

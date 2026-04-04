@@ -32,6 +32,10 @@ export default defineConfig({
               .title('Services')
               .schemaType('service')
               .child(S.documentTypeList('service').title('Services')),
+            S.listItem()
+              .title('Service Packages')
+              .schemaType('servicePackage')
+              .child(S.documentTypeList('servicePackage').title('Service Packages')),
           ]),
     }),
     visionTool(),
