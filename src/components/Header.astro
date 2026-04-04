@@ -1,14 +1,17 @@
 ---
-const navLinks = [
-	{ href: '/services', label: 'Services' },
+const serviceLinks = [
+	{ href: '/services', label: 'All Services' },
 	{ href: '/postpartum-doula', label: 'Postpartum Doula' },
 	{ href: '/sleep-consulting', label: 'Sleep Consulting' },
+];
+
+const navLinks = [
 	{ href: '/about', label: 'About' },
 	{ href: '/blog', label: 'Blog' },
-	{ href: '/faq', label: 'FAQ' },
 ];
 
 const currentPath = Astro.url.pathname;
+const servicesActive = serviceLinks.some(l => currentPath === l.href || (l.href !== '/' && currentPath.startsWith(l.href)));
 ---
 
 <nav class="navbar">
@@ -21,6 +24,25 @@ const currentPath = Astro.url.pathname;
 
 		<!-- Desktop links -->
 		<ul class="navbar-links">
+			<!-- Services dropdown -->
+			<li class="has-dropdown">
+				<button class={`dropdown-trigger${servicesActive ? ' active' : ''}`} aria-expanded="false" aria-haspopup="true">
+					Services
+					<svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+						<path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					{serviceLinks.map(({ href, label }) => (
+						<li role="none">
+							<a href={href} role="menuitem"
+								class={currentPath === href || (href !== '/services' && currentPath.startsWith(href)) ? 'active' : ''}>
+								{label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</li>
 			{navLinks.map(({ href, label }) => (
 				<li>
 					<a
@@ -45,6 +67,20 @@ const currentPath = Astro.url.pathname;
 	<!-- Mobile drawer -->
 	<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
 		<ul>
+			<!-- Services expandable -->
+			<li class="mobile-has-dropdown">
+				<button class={`mobile-dropdown-trigger${servicesActive ? ' active' : ''}`} aria-expanded="false">
+					Services
+					<svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+						<path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+				<ul class="mobile-dropdown">
+					{serviceLinks.map(({ href, label }) => (
+						<li><a href={href}>{label}</a></li>
+					))}
+				</ul>
+			</li>
 			{navLinks.map(({ href, label }) => (
 				<li><a href={href}>{label}</a></li>
 			))}
@@ -94,6 +130,7 @@ const currentPath = Astro.url.pathname;
 		letter-spacing: -0.01em;
 	}
 
+	/* ── Desktop nav ── */
 	.navbar-links {
 		display: flex;
 		align-items: center;
@@ -103,7 +140,8 @@ const currentPath = Astro.url.pathname;
 		padding: 0;
 	}
 
-	.navbar-links a {
+	.navbar-links a,
+	.dropdown-trigger {
 		text-decoration: none;
 		font-size: 0.78rem;
 		font-weight: 500;
@@ -111,10 +149,20 @@ const currentPath = Astro.url.pathname;
 		letter-spacing: 0.08em;
 		color: #5c4a2a;
 		transition: color 0.2s;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		font-family: inherit;
+		display: flex;
+		align-items: center;
+		gap: 4px;
 	}
 
 	.navbar-links a:hover,
-	.navbar-links a.active { color: #cc806b; }
+	.navbar-links a.active,
+	.dropdown-trigger:hover,
+	.dropdown-trigger.active { color: #cc806b; }
 
 	.navbar-cta {
 		background: #cc806b !important;
@@ -132,7 +180,70 @@ const currentPath = Astro.url.pathname;
 		transform: translateY(-1px);
 	}
 
-	/* Hamburger */
+	/* ── Dropdown ── */
+	.has-dropdown {
+		position: relative;
+	}
+
+	.chevron {
+		transition: transform 0.2s;
+		flex-shrink: 0;
+	}
+
+	.dropdown-trigger[aria-expanded="true"] .chevron {
+		transform: rotate(180deg);
+	}
+
+	.dropdown-menu {
+		position: absolute;
+		top: calc(100% + 12px);
+		left: 50%;
+		transform: translateX(-50%);
+		min-width: 200px;
+		background: #ede8de;
+		border: 1px solid rgba(92, 74, 42, 0.1);
+		border-radius: 10px;
+		box-shadow: 0 8px 24px rgba(92, 74, 42, 0.12);
+		list-style: none;
+		margin: 0;
+		padding: 6px;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateX(-50%) translateY(-6px);
+		transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
+		pointer-events: none;
+	}
+
+	.has-dropdown:hover .dropdown-menu,
+	.has-dropdown:focus-within .dropdown-menu,
+	.dropdown-trigger[aria-expanded="true"] ~ .dropdown-menu {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(-50%) translateY(0);
+		pointer-events: auto;
+	}
+
+	.dropdown-menu a {
+		display: block;
+		padding: 9px 14px;
+		border-radius: 6px;
+		font-size: 0.78rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: #5c4a2a;
+		text-decoration: none;
+		transition: background 0.15s, color 0.15s;
+		white-space: nowrap;
+	}
+
+	.dropdown-menu a:hover,
+	.dropdown-menu a.active {
+		background: rgba(204, 128, 107, 0.1);
+		color: #cc806b;
+	}
+
+	/* ── Hamburger ── */
 	.menu-toggle {
 		display: none;
 		background: none;
@@ -151,7 +262,7 @@ const currentPath = Astro.url.pathname;
 		transition: 0.3s;
 	}
 
-	/* Mobile menu drawer */
+	/* ── Mobile drawer ── */
 	.mobile-menu {
 		display: none;
 		background: #ede8de;
@@ -161,15 +272,14 @@ const currentPath = Astro.url.pathname;
 
 	.mobile-menu.open { display: block; }
 
-	.mobile-menu ul {
+	.mobile-menu > ul {
 		list-style: none;
-		margin: 0;
+		margin: 0 auto;
 		padding: 0;
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
 		max-width: 1100px;
-		margin: 0 auto;
 	}
 
 	.mobile-menu a {
@@ -193,6 +303,46 @@ const currentPath = Astro.url.pathname;
 		padding: 10px 24px !important;
 	}
 
+	/* Mobile Services expandable */
+	.mobile-dropdown-trigger {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		width: 100%;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 10px 12px;
+		font-size: 0.85rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #5c4a2a;
+		border-radius: 8px;
+		font-family: inherit;
+		transition: background 0.2s, color 0.2s;
+	}
+
+	.mobile-dropdown-trigger:hover,
+	.mobile-dropdown-trigger.active { background: rgba(204, 128, 107, 0.08); color: #cc806b; }
+
+	.mobile-dropdown-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+
+	.mobile-dropdown {
+		list-style: none;
+		margin: 2px 0 0;
+		padding: 0 0 0 16px;
+		display: none;
+	}
+
+	.mobile-dropdown.open { display: block; }
+
+	.mobile-dropdown a {
+		font-size: 0.8rem;
+		padding: 8px 12px;
+		color: #5c4a2a;
+	}
+
 	@media (max-width: 900px) {
 		.navbar-links { display: none; }
 		.menu-toggle { display: block; }
@@ -202,6 +352,7 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
+	// Hamburger toggle
 	const toggle = document.getElementById('menu-toggle');
 	const menu = document.getElementById('mobile-menu');
 
@@ -210,5 +361,31 @@ const currentPath = Astro.url.pathname;
 		menu?.classList.toggle('open', !isOpen);
 		toggle.setAttribute('aria-expanded', String(!isOpen));
 		toggle.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+	});
+
+	// Desktop dropdown: toggle on click (for keyboard/touch)
+	const desktopTrigger = document.querySelector<HTMLButtonElement>('.dropdown-trigger');
+	const desktopDropdown = document.querySelector<HTMLElement>('.dropdown-menu');
+
+	desktopTrigger?.addEventListener('click', () => {
+		const expanded = desktopTrigger.getAttribute('aria-expanded') === 'true';
+		desktopTrigger.setAttribute('aria-expanded', String(!expanded));
+	});
+
+	// Close desktop dropdown when clicking outside
+	document.addEventListener('click', (e) => {
+		if (desktopTrigger && desktopDropdown && !desktopTrigger.closest('.has-dropdown')?.contains(e.target as Node)) {
+			desktopTrigger.setAttribute('aria-expanded', 'false');
+		}
+	});
+
+	// Mobile Services expandable
+	const mobileTrigger = document.querySelector<HTMLButtonElement>('.mobile-dropdown-trigger');
+	const mobileDropdown = document.querySelector<HTMLElement>('.mobile-dropdown');
+
+	mobileTrigger?.addEventListener('click', () => {
+		const expanded = mobileTrigger.getAttribute('aria-expanded') === 'true';
+		mobileTrigger.setAttribute('aria-expanded', String(!expanded));
+		mobileDropdown?.classList.toggle('open', !expanded);
 	});
 </script>
