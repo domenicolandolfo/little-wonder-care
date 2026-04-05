@@ -1,5 +1,6 @@
 ---
 // Only inject on non-studio paths — don't track admin activity.
+// Requires PUBLIC_POSTHOG_KEY to be set in Vercel environment variables.
 const isStudio = Astro.url.pathname.startsWith('/studio');
 const apiKey = import.meta.env.PUBLIC_POSTHOG_KEY;
 ---
