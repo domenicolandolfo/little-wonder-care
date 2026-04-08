@@ -143,6 +143,15 @@ hr { border: none; border-top: 1px solid rgba(183,201,206,0.4); }
 	margin: 0;
 }
 
+/* Reset button defaults so Cal.com popup triggers look the same as <a> CTAs */
+button.btn-cta,
+button.btn-cta-light,
+button.btn-outline {
+	border: none;
+	cursor: pointer;
+	font-family: inherit;
+}
+
 /* Shared buttons */
 .btn-cta {
 	display: inline-block;

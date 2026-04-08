@@ -53,7 +53,7 @@ const servicesActive = serviceLinks.some(l => currentPath === l.href || (l.href 
 					</a>
 				</li>
 			))}
-			<li><a href="/contact" class="navbar-cta">Book Now</a></li>
+			<li><a href="/contact" data-cal-link="littlewondercare/discovery-call" data-cal-namespace="" class="navbar-cta">Book Now</a></li>
 		</ul>
 
 		<!-- Hamburger -->
@@ -84,7 +84,7 @@ const servicesActive = serviceLinks.some(l => currentPath === l.href || (l.href 
 			{navLinks.map(({ href, label }) => (
 				<li><a href={href}>{label}</a></li>
 			))}
-			<li><a href="/contact" class="navbar-cta">Book Now</a></li>
+			<li><a href="/contact" data-cal-link="littlewondercare/discovery-call" data-cal-namespace="" class="navbar-cta">Book Now</a></li>
 		</ul>
 	</div>
 </nav>

@@ -19,6 +19,7 @@ const grouped = hasSanityData
   : {};
 
 // Static fallback data
+// calLink = Cal.com event path (triggers popup); ctaLink = normal href fallback (used when calLink absent)
 const staticPackages = [
   {
     tag: 'Sleep',
@@ -28,7 +29,7 @@ const staticPackages = [
     duration: '60 min',
     features: ['Pre-call intake questionnaire', '60-minute video consultation', 'Written sleep plan within 48 hours', 'One follow-up email'],
     ctaText: 'Book Now',
-    ctaLink: '/contact',
+    calLink: 'littlewondercare/sleep-consultation',
     ctaClass: 'btn-cta',
     note: 'Books directly via calendar',
     popular: false,
@@ -41,7 +42,7 @@ const staticPackages = [
     duration: '2 weeks',
     features: ['90-minute initial assessment call', 'Custom gentle sleep plan', '14 days of daily support (text/email)', 'Two 30-minute follow-up calls', 'Sleep log tracking & adjustments'],
     ctaText: 'Book First Session',
-    ctaLink: '/contact',
+    calLink: 'littlewondercare/sleep-program-intro',
     ctaClass: 'btn-cta',
     note: 'Books first session via calendar · payment at booking',
     popular: true,
@@ -54,7 +55,7 @@ const staticPackages = [
     duration: '60 min',
     features: ['60-minute session (in-home or virtual)', 'Newborn care guidance', 'Feeding support & resources', 'Personalized recommendations'],
     ctaText: 'Book Now',
-    ctaLink: '/contact',
+    calLink: 'littlewondercare/doula-consultation',
     ctaClass: 'btn-cta',
     note: 'Books directly via calendar',
     popular: false,
@@ -67,7 +68,7 @@ const staticPackages = [
     duration: 'custom',
     features: ['Prenatal planning visit', 'Weekly in-home visits (Waco area)', 'Emotional & practical support', 'Newborn care education', 'Feeding guidance', 'Light household support'],
     ctaText: 'Request Availability',
-    ctaLink: '#request',
+    ctaLink: '#request',   // keeps the scroll-to-form behaviour — no Cal popup
     ctaClass: 'btn-outline',
     note: 'Limited to 3 clients/month · submit a request below',
     popular: false,
@@ -134,9 +135,15 @@ const staticPackages = [
 													{pkg.features.map((f) => <li>{f}</li>)}
 												</ul>
 											)}
-											{pkg.ctaLink && (
-												<a href={pkg.ctaLink} class="btn-cta">{pkg.ctaText ?? 'Book Now'}</a>
-											)}
+											{pkg.ctaLink && (() => {
+												const isCalLink = pkg.ctaLink.startsWith('cal:');
+												const calPath = isCalLink ? pkg.ctaLink.slice(4) : null;
+												return isCalLink ? (
+													<button data-cal-link={calPath} data-cal-namespace="" class="btn-cta">{pkg.ctaText ?? 'Book Now'}</button>
+												) : (
+													<a href={pkg.ctaLink} class="btn-cta">{pkg.ctaText ?? 'Book Now'}</a>
+												);
+											})()}
 										</div>
 									))}
 								</div>
@@ -155,7 +162,11 @@ const staticPackages = [
 									<ul class="package-includes">
 										{pkg.features.map((f) => <li>{f}</li>)}
 									</ul>
+									{pkg.calLink ? (
+									<button data-cal-link={pkg.calLink} data-cal-namespace="" class={pkg.ctaClass}>{pkg.ctaText}</button>
+								) : (
 									<a href={pkg.ctaLink} class={pkg.ctaClass}>{pkg.ctaText}</a>
+								)}
 									<p class="package-booking-note">{pkg.note}</p>
 								</div>
 							))}
@@ -166,7 +177,7 @@ const staticPackages = [
 						<strong>Not sure which option is right for you?</strong><br />
 						Book a free 15-minute discovery call and we'll figure it out together.
 						<br /><br />
-						<a href="/contact" class="btn-outline">Free Discovery Call</a>
+						<button data-cal-link="littlewondercare/discovery-call" data-cal-namespace="" class="btn-outline">Free Discovery Call</button>
 					</div>
 				</div>
 			</div>
@@ -222,7 +233,7 @@ const staticPackages = [
 			<section class="cta-band">
 				<h2>Ready to Take the First Step?</h2>
 				<p>Book a free 20-minute call. Let's talk about your needs and find the right solution for your family.</p>
-				<a href="/contact" class="btn-cta-light">Book Your Free Call</a>
+				<button data-cal-link="littlewondercare/discovery-call" data-cal-namespace="" class="btn-cta-light">Book Your Free Call</button>
 			</section>
 
 		</main>
